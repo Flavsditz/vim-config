@@ -649,6 +649,7 @@ require("lazy").setup({
 				asm_lsp = {},
 				ansiblels = {},
 				bashls = {},
+				html = {},
 				cssls = {},
 				zls = {},
 				intelephense = {},
