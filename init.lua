@@ -652,8 +652,24 @@ require("lazy").setup({
 				html = {},
 				cssls = {},
 				zls = {},
-				intelephense = {},
+				intelephense = {
+					filetypes = { "php", "blade", "php_only" },
+					settings = {
+						intelephense = {
+							filetypes = { "php", "blade", "php_only" },
+							files = {
+								associations = { "*.php", "*.blade.php" }, -- Associating .blade.php files as well
+								maxSize = 5000000,
+							},
+						},
+					},
+				},
+				pint = {},
+				phpstan = {},
 				prettier = {},
+				rustywind = {},
+				htmx = {},
+				htmlbeautifier = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -683,6 +699,7 @@ require("lazy").setup({
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
+				"blade-formatter", -- Used to format blade files (PHP)
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -735,15 +752,34 @@ require("lazy").setup({
 			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
+				php = { "pint" },
+				blade = { "blade-formatter", "rustywind" },
+				javascript = { "prettierd", "prettier", stop_after_first = true },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 			},
+			---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
+			formatters = {
+				injected = { options = { ignore_errors = true } },
+				pint = {
+					meta = {
+						url = "https://github.com/laravel/pint",
+						description = "Laravel Pint is an opinionated PHP code style fixer for minimalists. Pint is built on top of PHP-CS-Fixer and makes it simple to ensure that your code style stays clean and consistent.",
+					},
+					command = function()
+						local pint_path = vim.fn.stdpath("data") .. "/mason/bin/pint"
+
+						return pint_path
+					end,
+					args = { "$FILENAME" },
+					stdin = false,
+				},
+			},
 		},
 	},
-
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
@@ -930,8 +966,28 @@ require("lazy").setup({
 			--  Check out: https://github.com/echasnovski/mini.nvim
 		end,
 	},
+	{
+		"jwalton512/vim-blade",
+	},
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			{
+				"EmranMR/tree-sitter-blade",
+				config = function()
+					---@class ParserConfig
+					local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+					parser_config.blade = {
+						install_info = {
+							url = "https://github.com/EmranMR/tree-sitter-blade", -- The repo URL
+							files = { "src/parser.c" },
+							branch = "main",
+						},
+						filetype = "blade", -- Recognize Blade filetypes
+					}
+				end,
+			},
+		},
 		build = ":TSUpdate",
 		main = "nvim-treesitter.configs", -- Sets main module to use for opts
 		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -956,6 +1012,8 @@ require("lazy").setup({
 				"kotlin",
 				"python",
 				"java",
+				"php",
+				"blade",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
