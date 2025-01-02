@@ -195,10 +195,6 @@ vim.keymap.set("n", "<leader>ee", vim.cmd.Ex, { desc = "Open file Explorer full 
 vim.keymap.set("n", "<leader>ev", vim.cmd.Vex, { desc = "Open file Explorer on the left side of the screen" })
 vim.keymap.set("n", "<leader>eh", vim.cmd.Sex, { desc = "Open file Explorer on the bottom half of the screen" })
 
--- Keybinds for vim-powered terminal in split window
-vim.api.nvim_set_keymap("n", "<leader>t", ":term<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<leader>t", "<C-\\><C-N>:term<CR>", { noremap = true, silent = true })
-
 -- Tab configurations
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
