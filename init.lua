@@ -191,9 +191,9 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Keybinds for file navigation
-vim.keymap.set("n", "<leader>fee", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>fev", vim.cmd.Vex)
-vim.keymap.set("n", "<leader>feh", vim.cmd.Sex)
+vim.keymap.set("n", "<leader>ee", vim.cmd.Ex, { desc = "Open file Explorer full screen" })
+vim.keymap.set("n", "<leader>ev", vim.cmd.Vex, { desc = "Open file Explorer on the left side of the screen" })
+vim.keymap.set("n", "<leader>eh", vim.cmd.Sex, { desc = "Open file Explorer on the bottom half of the screen" })
 
 -- Keybinds for vim-powered terminal in split window
 vim.api.nvim_set_keymap("n", "<leader>t", ":term<CR>", { noremap = true, silent = true })
