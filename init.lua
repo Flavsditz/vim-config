@@ -742,7 +742,7 @@ require("lazy").setup({
 					lsp_format_opt = "fallback"
 				end
 				return {
-					timeout_ms = 500,
+					timeout_ms = 2500,
 					lsp_format = lsp_format_opt,
 				}
 			end,
@@ -750,6 +750,7 @@ require("lazy").setup({
 				lua = { "stylua" },
 				php = { "pint" },
 				blade = { "blade-formatter", "rustywind" },
+				html = { "htmlbeautifier", "rustywind" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
