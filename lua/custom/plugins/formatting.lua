@@ -40,6 +40,7 @@ return {
 				blade = { "blade-formatter", "rustywind" },
 				html = { "htmlbeautifier", "rustywind" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
+				vue = { "rustywind" },
 			},
 			formatters = {
 				injected = { options = { ignore_errors = true } },

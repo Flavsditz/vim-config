@@ -19,12 +19,12 @@ return {
 				end)(),
 				dependencies = {
 					-- Uncomment the block below to load additional snippets if desired:
-					-- {
-					--   "rafamadriz/friendly-snippets",
-					--   config = function()
-					--     require("luasnip.loaders.from_vscode").lazy_load()
-					--   end,
-					-- },
+					{
+						"rafamadriz/friendly-snippets",
+						config = function()
+							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
 				},
 			},
 			"saadparwaiz1/cmp_luasnip",

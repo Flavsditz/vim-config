@@ -48,6 +48,7 @@ return {
 				"java",
 				"php",
 				"blade",
+				"vue",
 			},
 			auto_install = true,
 			highlight = {

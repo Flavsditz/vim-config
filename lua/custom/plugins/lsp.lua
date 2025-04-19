@@ -103,6 +103,7 @@ return {
 				html = {},
 				cssls = {},
 				zls = {},
+				volar = {},
 				intelephense = {
 					filetypes = { "php", "blade", "php_only" },
 					settings = {
@@ -115,7 +116,10 @@ return {
 				pint = {},
 				phpstan = {},
 				prettier = {},
-				rustywind = {},
+				rustywind = {
+					filetypes = { "vue", "html", "php", "blade", "jsx", "js" },
+				},
+				tailwindcss = {},
 				htmx = {},
 				htmlbeautifier = {},
 				lua_ls = {
